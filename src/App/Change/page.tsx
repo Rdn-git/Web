@@ -20,14 +20,13 @@ const categories = [
 const products = [
   {
     title: "Hoodie Essentials",
-    image: "Hoodie.jpg",
+    image: "/images/Туяа.jpg",
     price: "₮120,000",
   },
-  { title: "Nike Sneakers", image: "Nike.jpg", price: "₮250,000" },
-  { title: "Smart Watch", image: "SmartWatch.jpg", price: "₮300,000" },
+  { title: "Nike Sneakers", image: "/images/sneakers.jpg", price: "₮250,000" },
+  { title: "Smart Watch", image: "/images/watch.jpg", price: "₮300,000" },
 ];
-
-export default function App() {
+export default function landing() {
   return (
     <Layout>
       <Header
@@ -66,23 +65,16 @@ export default function App() {
         <Carousel autoplay>
           <div>
             <img
-              src="shop.jpg"
+              src="/images/banner1.jpg"
               alt="banner1"
-              style={{ width: "100%", maxHeight: "700px", objectFit: "cover" }}
+              style={{ width: "100%" }}
             />
           </div>
           <div>
             <img
-              src="image.jpg"
+              src="/images/banner2.jpg"
               alt="banner2"
-              style={{ width: "100%", maxHeight: "700px", objectFit: "cover" }}
-            />
-          </div>
-          <div>
-            <img
-              src="Cart.jpg"
-              alt="banner3"
-              style={{ width: "100%", maxHeight: "700px", objectFit: "cover" }}
+              style={{ width: "100%" }}
             />
           </div>
         </Carousel>
@@ -93,13 +85,7 @@ export default function App() {
             <Card
               key={index}
               hoverable
-              cover={
-                <img
-                  alt={product.title}
-                  src={product.image}
-                  style={{ maxHeight: "200px", objectFit: "cover" }}
-                />
-              }
+              cover={<img alt={product.title} src={product.image} />}
             >
               <Card.Meta title={product.title} description={product.price} />
             </Card>
