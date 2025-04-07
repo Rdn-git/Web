@@ -1,20 +1,12 @@
 "use client";
 import React from "react";
-import HeroSlider from "../../components/HeroSlider";
-import AboutSlider from "../../components/AboutSlider";
-import Footer from "../../components/Footer";
 
-const Home = () => {
-  // Correctly define the component with arrow function syntax
+// src/app/(landing)/page.tsx
+export default function LandingPage() {
   return (
-    <>
-      <div className="bg-blue-500 text-white p-4">Hello, Tailwind CSS!</div>
-
-      <HeroSlider />
-      <AboutSlider />
-      <Footer />
-    </>
+    <div>
+      <h1>Welcome to the Landing Page!</h1>
+      <p>This is the main page of your website.</p>
+    </div>
   );
-};
-
-export default Home; // Export the component properly
+}
