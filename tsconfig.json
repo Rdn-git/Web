@@ -1,17 +1,9 @@
 {
   "compilerOptions": {
-    "types": [
-      "react-router-dom"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "types": ["react-router-dom"],
+    "typeRoots": ["node_modules/@types"],
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -30,13 +22,12 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".", // Энэ мөрийг нэмэх: үндсэн директорийг зааж өгнө
+    "paths": {
+      "@/*": ["src/*"] // Энэ мөрийг нэмэх: @-г src хавтас руу чиглүүлнэ
+    }
   },
-  "include": [
-    "src",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

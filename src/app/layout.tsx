@@ -1,7 +1,14 @@
 // src/app/layout.tsx
-import React from "react";
+
+import "./globals.css";
 import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
+
+const inter = Inter({ subsets: ["latin"], display: "swap" });
+
+export const metadata = {
+  title: "Монгол-Солонгосын Политехник Коллеж",
+  description: "Албан ёсны вэбсайт",
+};
 
 export default function RootLayout({
   children,
@@ -9,8 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="mn">
+      <body className={`${inter.className} bg-white text-black`}>
+        <div className="min-h-screen w-full">{children}</div>
+      </body>
     </html>
   );
 }

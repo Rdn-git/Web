@@ -2,17 +2,26 @@ import React from "react";
 
 const HeroSlider: React.FC = () => {
   return (
-    <div className="w-full h-[400px] flex items-center justify-center text-white text-center">
+    <section className="relative w-full h-[500px] md:h-[600px]">
+      {/* Background Image */}
       <img
         src="/building.jpg"
         alt="Hero Slider"
         className="w-full h-full object-cover"
       />
-      <div className="bg-black bg-opacity-50 p-6 rounded-xl absolute">
-        <h1 className="text-4xl font-bold mb-4">Тавтай морилно уу</h1>
-        <p className="text-xl">Монгол-Солонгосын Политехник Коллеж</p>
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div className="text-center px-4">
+          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+            Тавтай морилно уу
+          </h1>
+          <p className="text-lg md:text-2xl text-white drop-shadow-md">
+            Монгол-Солонгосын Политехник Коллеж
+          </p>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
