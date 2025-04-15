@@ -16,10 +16,40 @@
       "static/chunks/main-app.js",
       "static/chunks/app/programs/page.js"
     ],
+    "/programs/it/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/programs/it/page.js"
+    ],
+    "/programs/fashion/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/programs/fashion/page.js"
+    ],
+    "/programs/graphic/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/programs/graphic/page.js"
+    ],
     "/currentnews/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/currentnews/page.js"
+    ],
+    "/programs/network-tech/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/programs/network-tech/page.js"
+    ],
+    "/programs/interior-design/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/programs/interior-design/page.js"
+    ],
+    "/programs/wood-designer/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/programs/wood-designer/page.js"
     ]
   }
 }

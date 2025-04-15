@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Layout, Button } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
@@ -10,67 +10,67 @@ const { Header } = Layout;
 
 const AppHeader = () => {
   const router = useRouter();
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  // 👉 Гадна талд дарвал mobile menu хаагдах
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !(menuRef.current as any).contains(event.target)) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [mobileMenuOpen]);
 
   return (
-    <Header className="bg-blue-700 shadow-md sticky top-0 z-50 w-full px-4 md:px-8 py-2 ">
-      <div className="flex justify-between items-center max-w-7xl mx-auto">
-        {/* Logo + Title + Buttons */}
-        <div className="flex items-center gap-6 flex-wrap">
-          {/* Logo + Title */}
-          <div className="flex items-center gap-3 mb-4 ">
-            <Image
-              src="/logo-dark.png"
-              alt="Logo"
-              width={100}
-              height={50}
-              className="rounded-md object-contain"
-              priority
-            />
-            <span className="text-white text-lg md:text-xl font-semibold leading-tight mt-3 whitespace-nowrap">
-              Монгол-Солонгосын Политехник Коллеж
-            </span>
-          </div>
+    <Header className="bg-blue-700 shadow-md sticky top-0 z-50 w-full px-4 md:px-8 py-2">
+      <div className="flex justify-between items-center max-w-7xl mx-auto relative">
+        {/* Logo + Title */}
+        <div className="flex items-center gap-3 mb-4 md:mb-0">
+          <Image
+            src="/logo-dark.png"
+            alt="Logo"
+            width={100}
+            height={50}
+            className="rounded-md object-contain"
+            priority
+          />
+          <span className="text-white text-lg md:text-xl font-semibold leading-tight mt-3 whitespace-nowrap">
+            Монгол-Солонгосын Политехник Коллеж ТБОС
+          </span>
+        </div>
 
-          {/* Navigation Buttons */}
-          <div className="flex items-center gap-4 relative">
-            <Button
-              type="primary"
-              className="text-white"
-              onClick={() => router.push("/currentnews")}
-            >
-              Мэдээ
-            </Button>
-            <Button
-              type="primary"
-              className="text-white"
-              onClick={() => router.push("/programs")}
-            >
-              Хөтөлбөр
-            </Button>
-
-            {/* Оюутан dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setIsDropdownVisible(true)}
-              onMouseLeave={() => setIsDropdownVisible(false)}
-            >
-              <Button type="primary" className="text-white">
-                Оюутан
-              </Button>
-
-              {isDropdownVisible && (
-                <div className="absolute top-full left-0 bg-white rounded shadow-md -mt-4 z-50 min-w-[120px]">
-                  <button
-                    onClick={() => router.push("/students/grades")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
-                    Дүн
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
+        {/* Desktop nav */}
+        <div className="hidden md:flex items-center gap-4">
+          <Button
+            type="primary"
+            className="text-white"
+            onClick={() => router.push("/currentnews")}
+          >
+            Мэдээ
+          </Button>
+          <Button
+            type="primary"
+            className="text-white"
+            onClick={() => router.push("/programs")}
+          >
+            Хөтөлбөр
+          </Button>
+          <Button
+            type="primary"
+            className="text-white"
+            onClick={() => router.push("/students/grades")}
+          >
+            Оюутан
+          </Button>
         </div>
 
         {/* Mobile menu icon */}
@@ -78,8 +78,48 @@ const AppHeader = () => {
           <Button
             type="text"
             icon={<MenuOutlined className="text-white text-xl" />}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           />
         </div>
+
+        {/* Mobile dropdown menu */}
+        {mobileMenuOpen && (
+          <div
+            ref={menuRef}
+            className="absolute left-0 right-0 top-full w-full bg-blue-600 px-4 pb-1 space-y-2 z-40 flex flex-col items-end max-w-7xl mx-auto"
+          >
+            <Button
+              type="primary"
+              className="text-white w-[100px] h-[36px] text-sm"
+              onClick={() => {
+                router.push("/currentnews");
+                setMobileMenuOpen(false);
+              }}
+            >
+              Мэдээ
+            </Button>
+            <Button
+              type="primary"
+              className="text-white w-[100px] h-[36px] text-sm"
+              onClick={() => {
+                router.push("/programs");
+                setMobileMenuOpen(false);
+              }}
+            >
+              Хөтөлбөр
+            </Button>
+            <Button
+              type="primary"
+              className="text-white w-[100px] h-[36px] text-sm"
+              onClick={() => {
+                router.push("/students/grades");
+                setMobileMenuOpen(false);
+              }}
+            >
+              Оюутан
+            </Button>
+          </div>
+        )}
       </div>
     </Header>
   );

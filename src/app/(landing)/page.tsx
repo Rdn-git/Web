@@ -1,10 +1,10 @@
-// src/app/(landing)/page.tsx
 "use client";
 
 import React from "react";
 import { Layout } from "antd";
 import AppHeader from "@/components/Header";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 
 const { Content } = Layout;
 
@@ -18,7 +18,7 @@ export default function LandingPage() {
         <section className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20 text-center px-4">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Монгол-Солонгосын Политехник Коллеж
+              Монгол-Солонгосын Политехник Коллеж ТБОС
             </h1>
             <p className="text-lg md:text-xl">
               Ирээдүйг бүтээх ур чадвартай мэргэжилтнүүдийг бэлтгэж байна
@@ -26,54 +26,96 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Training Programs section */}
-        <section className="py-16 px-4 bg-gray-50">
-          <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-8">
-              Сургалтын Хөтөлбөрүүд
+        {/* About Us section */}
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-5xl mx-auto text-center">
+            <h2 className="text-4xl font-semibold text-gray-900 mb-8">
+              Бидний тухай
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                { title: "Мэргэжлийн боловсрол", icon: "📘" },
-                { title: "Техникийн боловсрол", icon: "⚙️" },
-                { title: "Машин үйлдвэрлэлийн сургалт", icon: "🛠️" },
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-white shadow-md p-6 rounded-xl hover:shadow-lg transition duration-300"
-                >
-                  <div className="text-4xl mb-4">{item.icon}</div>
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600">
-                    Дэлгэрэнгүй мэдээллийг энд оруулна...
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+            <div className="space-y-6 text-lg text-gray-700">
+              <p className="leading-relaxed">
+                Монгол-Солонгосын Политехник Коллеж нь 1966 онд үүсгэн
+                байгуулагдсан бөгөөд 60 жилийн турш хөнгөн аж үйлдвэрийн салбарт
+                мэргэжилтнүүдийг бэлтгэж ирсэн.
+              </p>
+              <div className="space-y-6 text-left">
+                <h3 className="text-xl font-semibold text-gray-900">
+                  Түүхийн тойм
+                </h3>
+                <p className="text-lg leading-relaxed mb-6">
+                  <strong>1966 он:</strong> Хөнгөн Үйлдвэрийн Техник Мэргэжлийн
+                  Сургууль үүсгэн байгуулагдав.
+                  <br />
+                  <strong>1980 он:</strong> Хөнгөн Хүнсний Аж Үйлдвэрийн
+                  Техникум болж өргөжсөн.
+                  <br />
+                  <strong>1991 он:</strong> Боловсролын шинэчлэлийн хүрээнд
+                  сургуулийн бүтэц өөрчлөгдсөн.
+                  <br />
+                  <strong>2000 он:</strong> Сургуулийг “Монгол-Солонгосын
+                  Техникийн Коллеж” гэж нэрлэж өргөжсөн.
+                  <br />
+                  <strong>2012 он:</strong> Монгол-Солонгосын Политехник Коллеж
+                  гэж нэрлэгдэж, өнөөгийн нэртэйгээр үйл ажиллагаагаа явуулж
+                  байна.
+                </p>
 
-        {/* Latest News section */}
-        <section className="py-16 px-4 bg-white">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-8 text-center">
-              Сүүлийн үеийн мэдээ, үйл явдал
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="bg-gray-100 rounded-xl overflow-hidden shadow hover:shadow-md transition"
-                >
-                  <div className="bg-blue-300 h-40"></div>
-                  <div className="p-4">
-                    <h3 className="font-semibold text-lg mb-2">Мэдээ {i}</h3>
-                    <p className="text-sm text-gray-600">
-                      Энд тухайн мэдээний товч тайлбар байрлана.
-                    </p>
-                  </div>
+                <p className="leading-relaxed">
+                  Өнөөдөр бид олон улсын стандартад нийцсэн, чанартай сургалтын
+                  хөтөлбөрийг санал болгодог бөгөөд 2012 оноос Монгол-Солонгосын
+                  Политехник Коллеж нэртэйгээр үйл ажиллагаагаа явуулж байна.
+                </p>
+              </div>
+
+              {/* Key Facts Section */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12">
+                <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-2xl font-semibold text-blue-600">60</h3>
+                  <p className="text-gray-500">Жил</p>
                 </div>
-              ))}
+                <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-2xl font-semibold text-blue-600">26</h3>
+                  <p className="text-gray-500">Мэргэжил</p>
+                </div>
+                <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-2xl font-semibold text-blue-600">
+                    1000+
+                  </h3>
+                  <p className="text-gray-500">Төгсөгчид</p>
+                </div>
+              </div>
+
+              {/* Image Section */}
+              <div className="mt-12">
+                <Image
+                  src="/building.jpg"
+                  alt="Бидний тухай зураг"
+                  width={900}
+                  height={400}
+                  className="mx-auto rounded-xl shadow-lg"
+                />
+              </div>
+
+              {/* Alumni Section */}
+              <div className="mt-12 text-left">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                  Алдартнууд
+                </h3>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li className="text-lg text-gray-700">
+                    Монгол улсын хөдөлмөрийн баатар Ш.Эрдэнэчимэг
+                  </li>
+                  <li className="text-lg text-gray-700">
+                    Аж үйлдвэрийн гавьяат ажилтан М.Мөнхцэцэг
+                  </li>
+                  <li className="text-lg text-gray-700">
+                    Монгол ардын жүжигчин Д.Мөнхшүр
+                  </li>
+                  <li className="text-lg text-gray-700">
+                    Монгол улсын гавьяат тамирчин Ц.Цогтгэрэл
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
