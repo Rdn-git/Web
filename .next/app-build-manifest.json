@@ -5,36 +5,31 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(landing)/page.js"
     ],
-    "/layout": [
+    "/programs/it/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
+      "static/chunks/app/programs/it/page.js"
     ],
     "/programs/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/programs/page.js"
     ],
-    "/programs/it/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/programs/it/page.js"
-    ],
     "/programs/fashion/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/programs/fashion/page.js"
     ],
+    "/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
+    ],
     "/programs/graphic/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/programs/graphic/page.js"
-    ],
-    "/currentnews/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/currentnews/page.js"
     ],
     "/programs/network-tech/page": [
       "static/chunks/webpack.js",
@@ -46,10 +41,30 @@
       "static/chunks/main-app.js",
       "static/chunks/app/programs/interior-design/page.js"
     ],
-    "/programs/wood-designer/page": [
+    "/programs/technical-korean-translator/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/programs/wood-designer/page.js"
+      "static/chunks/app/programs/technical-korean-translator/page.js"
+    ],
+    "/programs/engineering-facility-technology/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/programs/engineering-facility-technology/page.js"
+    ],
+    "/programs/electrical-technician/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/programs/electrical-technician/page.js"
+    ],
+    "/programs/car-mechanics/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/programs/car-mechanics/page.js"
+    ],
+    "/not-found": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/not-found.js"
     ]
   }
 }

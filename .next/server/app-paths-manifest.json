@@ -1,7 +1,9 @@
 {
+  "/not-found": "app/not-found.js",
   "/programs/page": "app/programs/page.js",
   "/(landing)/page": "app/(landing)/page.js",
   "/programs/graphic/page": "app/programs/graphic/page.js",
-  "/programs/interior-design/page": "app/programs/interior-design/page.js",
-  "/currentnews/page": "app/currentnews/page.js"
+  "/programs/car-mechanics/page": "app/programs/car-mechanics/page.js",
+  "/programs/network-tech/page": "app/programs/network-tech/page.js",
+  "/programs/interior-design/page": "app/programs/interior-design/page.js"
 }

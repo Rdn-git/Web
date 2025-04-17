@@ -39,7 +39,7 @@ const GraphicProgramDetailPage = () => {
         <li>Мэргэжлийн үнэмлэх олгоно</li>
         <li>Их дээд сургуульд шатлан суралцах боломжтой</li>
       </ul>
-      <img src="../Suragch1.jpg" alt="График дизайнерийн анги" />
+      <img src="../graphlab.jpg" alt="График дизайнерийн анги" />
     </div>
   );
 };

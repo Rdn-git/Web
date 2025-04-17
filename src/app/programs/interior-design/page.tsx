@@ -49,7 +49,7 @@ const InteriorDesignProgramDetailPage = () => {
       <p className="text-gray-700 mb-6 leading-relaxed">
         Бүрэн дунд болон мэргэжлийн боловсрол эзэмшисэн байх.
       </p>
-      <img src="../suragch2.jpg" alt="Интерьер Дизайн анги" />
+      <img src="../123.jpg" alt="Интерьер Дизайн анги" />
     </div>
   );
 };
