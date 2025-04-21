@@ -26,6 +26,17 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* Image Section */}
+        <div className="mt-12">
+          <Image
+            src="/building.jpg"
+            alt="Бидний тухай зураг"
+            width={900}
+            height={400}
+            className="mx-auto rounded-xl shadow-lg"
+          />
+        </div>
+
         {/* About Us section */}
         <section className="py-16 bg-gray-50">
           <div className="max-w-5xl mx-auto text-center">
@@ -83,17 +94,6 @@ export default function LandingPage() {
                   </h3>
                   <p className="text-gray-500">Төгсөгчид</p>
                 </div>
-              </div>
-
-              {/* Image Section */}
-              <div className="mt-12">
-                <Image
-                  src="/building.jpg"
-                  alt="Бидний тухай зураг"
-                  width={900}
-                  height={400}
-                  className="mx-auto rounded-xl shadow-lg"
-                />
               </div>
 
               {/* Alumni Section */}

@@ -1,5 +1,3 @@
-// app/programs/interior-design/page.tsx
-
 import React from "react";
 
 const CarMechanicsProgramDetailPage = () => {
@@ -35,7 +33,7 @@ const CarMechanicsProgramDetailPage = () => {
       <p className="text-gray-700 mb-6 leading-relaxed">
         Бүрэн дунд болон мэргэжлийн боловсрол эзэмшисэн байх.
       </p>
-      <img src="../car1.jpg" alt="Автомашин механик" />
+      <img src="../autoww.jpg" alt="Автомашин механик" />
     </div>
   );
 };

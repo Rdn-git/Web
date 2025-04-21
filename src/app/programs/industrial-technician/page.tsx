@@ -1,5 +1,3 @@
-// app/programs/interior-design/page.tsx
-
 import React from "react";
 
 const IndustrialTechnologyProgramDetailPage = () => {
@@ -39,7 +37,7 @@ const IndustrialTechnologyProgramDetailPage = () => {
       <p className="text-gray-700 mb-6 leading-relaxed">
         Мэргэжлийн боловсрол эзэмшисэн байх.
       </p>
-      <img src="../suragch2.jpg" alt="Интерьер Дизайн анги" />
+      <img src="../honga.jpg" alt="Интерьер Дизайн анги" />
     </div>
   );
 };

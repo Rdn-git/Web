@@ -1,9 +1,8 @@
 {
-  "/not-found": "app/not-found.js",
-  "/programs/page": "app/programs/page.js",
   "/(landing)/page": "app/(landing)/page.js",
-  "/programs/graphic/page": "app/programs/graphic/page.js",
-  "/programs/car-mechanics/page": "app/programs/car-mechanics/page.js",
-  "/programs/network-tech/page": "app/programs/network-tech/page.js",
-  "/programs/interior-design/page": "app/programs/interior-design/page.js"
+  "/teachers/login/page": "app/teachers/login/page.js",
+  "/students/dashboard/page": "app/students/dashboard/page.js",
+  "/teachers/register/page": "app/teachers/register/page.js",
+  "/students/login/page": "app/students/login/page.js",
+  "/teachers/dashboard/page": "app/teachers/dashboard/page.js"
 }

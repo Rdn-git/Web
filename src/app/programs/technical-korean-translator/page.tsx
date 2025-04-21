@@ -1,5 +1,3 @@
-// app/programs/technical-korean-translator/page.tsx
-
 import React from "react";
 
 const TechnicalKoreanTranslatorProgramDetailPage = () => {
@@ -39,7 +37,7 @@ const TechnicalKoreanTranslatorProgramDetailPage = () => {
       <p className="text-gray-700 mb-6 leading-relaxed">
         Бүрэн дунд болон мэргэжлийн боловсрол эзэмшисэн байх.
       </p>
-      <img src="../suragch2.jpg" alt="Интерьер Дизайн анги" />
+      <img src="../koreat.jpg" alt="Интерьер Дизайн анги" />
     </div>
   );
 };

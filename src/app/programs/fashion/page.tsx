@@ -6,9 +6,6 @@ const FashionProgramDetailPage = () => {
       <h1 className="text-3xl font-bold text-blue-900 mb-4">
         Хувцасны загвар зохион бүтээгч
       </h1>
-      <h2 className="font-bold text-blue-700 leading-relaxed">
-        Мэргэжлийн тодорхойлолт:
-      </h2>
       <p className="text-gray-700 leading-relaxed mb-4"></p>
       Хувцасны анхдагч элемэнтүүд зохиомжийн аргууд , хувцасны эскиз зурах арга
       техник арга барил эзэмших мөн төрөл бүрийн оёмол бүтээгдэхүүнийг хүний

@@ -67,9 +67,16 @@ const AppHeader = () => {
           <Button
             type="primary"
             className="text-white"
-            onClick={() => router.push("/students/grades")}
+            onClick={() => router.push("students/login")}
           >
             Оюутан
+          </Button>
+          <Button
+            type="primary"
+            className="text-white"
+            onClick={() => router.push("teachers/login")}
+          >
+            Багшаар нэвтрэх
           </Button>
         </div>
 
@@ -112,11 +119,21 @@ const AppHeader = () => {
               type="primary"
               className="text-white w-[100px] h-[36px] text-sm"
               onClick={() => {
-                router.push("/students/grades");
+                router.push("students/login");
                 setMobileMenuOpen(false);
               }}
             >
               Оюутан
+            </Button>
+            <Button
+              type="primary"
+              className="text-white w-[100px] h-[36px] text-sm"
+              onClick={() => {
+                router.push("teachers/login");
+                setMobileMenuOpen(false);
+              }}
+            >
+              Багшаар нэвтрэх
             </Button>
           </div>
         )}

@@ -1,5 +1,3 @@
-// app/programs/interior-design/page.tsx
-
 import React from "react";
 
 const EngineeringFacilityTechnologyProgramDetailPage = () => {

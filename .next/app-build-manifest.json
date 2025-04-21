@@ -5,66 +5,36 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(landing)/page.js"
     ],
-    "/programs/it/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/programs/it/page.js"
-    ],
-    "/programs/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/programs/page.js"
-    ],
-    "/programs/fashion/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/programs/fashion/page.js"
-    ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/programs/graphic/page": [
+    "/teachers/login/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/programs/graphic/page.js"
+      "static/chunks/app/teachers/login/page.js"
     ],
-    "/programs/network-tech/page": [
+    "/teachers/register/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/programs/network-tech/page.js"
+      "static/chunks/app/teachers/register/page.js"
     ],
-    "/programs/interior-design/page": [
+    "/teachers/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/programs/interior-design/page.js"
+      "static/chunks/app/teachers/dashboard/page.js"
     ],
-    "/programs/technical-korean-translator/page": [
+    "/students/login/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/programs/technical-korean-translator/page.js"
+      "static/chunks/app/students/login/page.js"
     ],
-    "/programs/engineering-facility-technology/page": [
+    "/students/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/programs/engineering-facility-technology/page.js"
-    ],
-    "/programs/electrical-technician/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/programs/electrical-technician/page.js"
-    ],
-    "/programs/car-mechanics/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/programs/car-mechanics/page.js"
-    ],
-    "/not-found": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/not-found.js"
+      "static/chunks/app/students/dashboard/page.js"
     ]
   }
 }

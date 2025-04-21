@@ -1,5 +1,3 @@
-// app/programs/network-tech/page.tsx
-
 import React from "react";
 
 const NetworkTechProgramDetailPage = () => {
@@ -46,7 +44,7 @@ const NetworkTechProgramDetailPage = () => {
         <li>Мэргэжлийн үнэмлэх болгоно</li>
         <li>Их дээд сургуульд шатлан суралцах боломжтой</li>
       </ul>
-      <img src="../suragch2.jpg" alt="Сүлжээний техникийн анги" />
+      <img src="../Сүлжээ.jpg" alt="Сүлжээний техникийн анги" />
     </div>
   );
 };
