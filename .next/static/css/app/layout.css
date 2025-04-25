@@ -710,6 +710,9 @@ video {
 .max-w-md {
   max-width: 28rem;
 }
+.max-w-xl {
+  max-width: 36rem;
+}
 .list-inside {
   list-style-position: inside;
 }

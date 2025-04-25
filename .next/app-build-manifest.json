@@ -1,40 +1,45 @@
 {
   "pages": {
-    "/(landing)/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(landing)/page.js"
-    ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/teachers/login/page": [
+    "/(landing)/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/teachers/login/page.js"
+      "static/chunks/app/(landing)/page.js"
     ],
-    "/teachers/register/page": [
+    "/programs/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/teachers/register/page.js"
+      "static/chunks/app/programs/page.js"
     ],
-    "/teachers/dashboard/page": [
+    "/currentnews/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/teachers/dashboard/page.js"
+      "static/chunks/app/currentnews/page.js"
+    ],
+    "/currentnews/news-2/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/currentnews/news-2/page.js"
+    ],
+    "/programs/it/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/programs/it/page.js"
+    ],
+    "/programs/fashion/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/programs/fashion/page.js"
     ],
     "/students/login/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/students/login/page.js"
-    ],
-    "/students/dashboard/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/students/dashboard/page.js"
     ]
   }
 }

@@ -1,8 +1,9 @@
 {
+  "/currentnews/page": "app/currentnews/page.js",
   "/(landing)/page": "app/(landing)/page.js",
-  "/teachers/login/page": "app/teachers/login/page.js",
-  "/students/dashboard/page": "app/students/dashboard/page.js",
-  "/teachers/register/page": "app/teachers/register/page.js",
-  "/students/login/page": "app/students/login/page.js",
-  "/teachers/dashboard/page": "app/teachers/dashboard/page.js"
+  "/programs/page": "app/programs/page.js",
+  "/programs/fashion/page": "app/programs/fashion/page.js",
+  "/currentnews/news-2/page": "app/currentnews/news-2/page.js",
+  "/programs/it/page": "app/programs/it/page.js",
+  "/students/login/page": "app/students/login/page.js"
 }

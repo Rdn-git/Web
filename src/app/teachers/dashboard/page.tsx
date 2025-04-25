@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Button, Input, message, Table } from "antd";
+import { Button, Input, message, Table, Select, Upload } from "antd";
+import { RcFile } from "antd/es/upload";
 import { supabase } from "lib/supabaseClient";
 import { useRouter } from "next/navigation";
 
@@ -9,51 +10,46 @@ import { useRouter } from "next/navigation";
 interface Student {
   id: string;
   name: string;
+  grade: number | null; // Дүн нэмэгдсэн
+}
+
+interface Class {
+  id: string;
+  name: string;
 }
 
 export default function TeacherDashboard() {
-  const [studentId, setStudentId] = useState<string>("");
-  const [grade, setGrade] = useState<string>("");
-  const [homework, setHomework] = useState<string>("");
-  const [schedule, setSchedule] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+  const [selectedClassId, setSelectedClassId] = useState<string | null>(null);
   const [students, setStudents] = useState<Student[]>([]);
+  const [classes, setClasses] = useState<Class[]>([]);
+  const [uploading, setUploading] = useState(false);
+  const [selectedStudentId, setSelectedStudentId] = useState<string | null>(
+    null
+  );
+  const [studentGrade, setStudentGrade] = useState<number | null>(null); // Дүн оруулах
 
   const router = useRouter();
 
-  // Дүн оруулах функц
-  const handleAddGrade = async () => {
-    if (!studentId || !grade) {
-      message.warning("Оюутны ID болон дүнг оруулна уу.");
-      return;
-    }
-
-    setLoading(true);
-
-    const { error } = await supabase.from("grades").insert([
-      {
-        student_id: studentId,
-        grade,
-        homework,
-        schedule,
-      },
-    ]);
-
-    setLoading(false);
+  // Ангиудыг авах
+  const fetchClasses = async () => {
+    const { data, error } = await supabase.from("classes").select("*");
 
     if (error) {
       message.error(`Алдаа гарлаа: ${error.message}`);
     } else {
-      message.success("Дүн амжилттай орууллаа!");
-      setGrade("");
-      setHomework("");
-      setSchedule("");
+      setClasses(data as Class[]);
     }
   };
 
   // Оюутнуудыг авах
   const fetchStudents = async () => {
-    const { data, error } = await supabase.from("students").select("*");
+    if (!selectedClassId) {
+      return; // Анги сонгоогүй бол оюутнуудыг авахгүй
+    }
+    const { data, error } = await supabase
+      .from("students")
+      .select("*")
+      .eq("class_id", selectedClassId); // Оюутныг ангийн дагуу авах
 
     if (error) {
       message.error(`Алдаа гарлаа: ${error.message}`);
@@ -62,48 +58,154 @@ export default function TeacherDashboard() {
     }
   };
 
+  // Оюутны дүн оруулах
+  const handleGradeSubmit = async () => {
+    if (!selectedStudentId || studentGrade === null) {
+      message.warning("Эхлээд оюутан сонгоно уу, мөн дүнгээ оруулна уу.");
+      return;
+    }
+
+    const { error } = await supabase
+      .from("students")
+      .update({ grade: studentGrade })
+      .eq("id", selectedStudentId);
+
+    if (error) {
+      message.error(`Дүн оруулахад алдаа гарлаа: ${error.message}`);
+    } else {
+      message.success("Дүн амжилттай орууллаа!");
+    }
+  };
+
+  // PDF файл оруулах функц
+  const handleUpload = async (file: RcFile) => {
+    if (!selectedClassId) {
+      message.warning("Эхлээд анги сонгоно уу.");
+      return false;
+    }
+
+    const classId = selectedClassId;
+
+    setUploading(true);
+
+    const fileExt = file.name?.split(".").pop();
+    const fileName = `${classId}-${Date.now()}.${fileExt}`;
+    const filePath = `${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("schedules")
+      .upload(filePath, file, {
+        contentType: file.type,
+      });
+
+    if (uploadError) {
+      message.error("Файл оруулж чадсангүй: " + uploadError.message);
+      setUploading(false);
+      return false;
+    }
+
+    const { data: fileData } = supabase.storage
+      .from("schedules")
+      .getPublicUrl(filePath);
+    const publicURL = fileData?.publicUrl;
+
+    const { data: uuidData, error: uuidError } = await supabase.rpc(
+      "uuid_generate_v4"
+    );
+
+    if (uuidError) {
+      message.error("UUID үүсгэх үед алдаа гарлаа: " + uuidError.message);
+      setUploading(false);
+      return false;
+    }
+
+    const { error: insertError } = await supabase.from("schedules").insert([
+      {
+        id: uuidData,
+        class_id: classId,
+        file_url: publicURL,
+      },
+    ]);
+
+    if (insertError) {
+      message.error("Файл оруулахад алдаа гарлаа: " + insertError.message);
+    } else {
+      message.success("Файл амжилттай орууллаа!");
+    }
+
+    setUploading(false);
+    return false;
+  };
+
+  useEffect(() => {
+    fetchClasses();
+  }, []);
+
   useEffect(() => {
     fetchStudents();
-  }, []);
+  }, [selectedClassId]);
 
   return (
     <div className="max-w-2xl mx-auto mt-8 space-y-4 p-4 border rounded shadow">
-      <h2 className="text-2xl font-bold">Багшийн Dashboard</h2>
+      <h2 className="text-2xl font-bold">Сайн байна уу Багшаа</h2>
 
-      <Input
-        placeholder="Оюутны ID"
-        value={studentId}
-        onChange={(e) => setStudentId(e.target.value)}
-      />
-      <Input
-        placeholder="Дүн"
-        value={grade}
-        onChange={(e) => setGrade(e.target.value)}
-      />
-      <Input
-        placeholder="Гэрийн даалгавар"
-        value={homework}
-        onChange={(e) => setHomework(e.target.value)}
-      />
-      <Input
-        placeholder="Хичээлийн хуваарь"
-        value={schedule}
-        onChange={(e) => setSchedule(e.target.value)}
-      />
+      {/* Анги сонгох */}
+      <Select
+        placeholder="Анги сонгоно уу"
+        value={selectedClassId}
+        onChange={(value) => setSelectedClassId(value)}
+        style={{ width: "100%" }}
+      >
+        {classes.map((classItem) => (
+          <Select.Option key={classItem.id} value={classItem.id}>
+            {classItem.name}
+          </Select.Option>
+        ))}
+      </Select>
 
-      <div className="flex gap-2">
-        <Button type="primary" onClick={handleAddGrade} loading={loading}>
-          Дүн оруулах
+      {/* Оюутан сонгох */}
+      <Select
+        placeholder="Оюутан сонгоно уу"
+        value={selectedStudentId}
+        onChange={(value) => setSelectedStudentId(value)}
+        style={{ width: "100%" }}
+      >
+        {students.map((student) => (
+          <Select.Option key={student.id} value={student.id}>
+            {student.name}
+          </Select.Option>
+        ))}
+      </Select>
+
+      {/* Оюутны дүн оруулах */}
+      <Input
+        type="number"
+        value={studentGrade ?? ""}
+        onChange={(e) => setStudentGrade(Number(e.target.value))}
+        placeholder="Оюутны дүн"
+      />
+      <Button onClick={handleGradeSubmit} type="primary">
+        Дүн оруулах
+      </Button>
+
+      {/* PDF файл оруулах */}
+      <Upload
+        customRequest={({ file }) => handleUpload(file as RcFile)}
+        showUploadList={false}
+      >
+        <Button type="primary" loading={uploading}>
+          Хичээлийн хуваарь оруулах
         </Button>
-        <Button onClick={fetchStudents}>Оюутнуудын жагсаалт</Button>
-      </div>
+      </Upload>
 
+      {/* Оюутнуудын жагсаалт */}
       <Table
         dataSource={students}
         rowKey="id"
         columns={[
           { title: "ID", dataIndex: "id", key: "id" },
           { title: "Нэр", dataIndex: "name", key: "name" },
+          { title: "Дүн", dataIndex: "grade", key: "grade" },
         ]}
       />
     </div>

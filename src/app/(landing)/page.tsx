@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Layout } from "antd";
+import { Layout, Carousel } from "antd";
 import AppHeader from "@/components/Header";
 import Footer from "@/components/Footer";
 import Image from "next/image";
@@ -26,16 +26,28 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Image Section */}
-        <div className="mt-12">
-          <Image
-            src="/building.jpg"
-            alt="Бидний тухай зураг"
-            width={900}
-            height={400}
-            className="mx-auto rounded-xl shadow-lg"
-          />
-        </div>
+        {/* Image Carousel Section */}
+        <section className="mt-12 max-w-5xl mx-auto">
+          <Carousel
+            autoplay
+            dots
+            className="rounded-xl overflow-hidden shadow-lg"
+          >
+            {["/building.jpg", "/aboutslider1.jpg", "/aboutslider3.jpg"].map(
+              (src, index) => (
+                <div key={index}>
+                  <Image
+                    src={src}
+                    alt={`Carousel image ${index + 1}`}
+                    width={800}
+                    height={400}
+                    className="w-full object-cover"
+                  />
+                </div>
+              )
+            )}
+          </Carousel>
+        </section>
 
         {/* About Us section */}
         <section className="py-16 bg-gray-50">
@@ -49,6 +61,7 @@ export default function LandingPage() {
                 байгуулагдсан бөгөөд 60 жилийн турш хөнгөн аж үйлдвэрийн салбарт
                 мэргэжилтнүүдийг бэлтгэж ирсэн.
               </p>
+
               <div className="space-y-6 text-left">
                 <h3 className="text-xl font-semibold text-gray-900">
                   Түүхийн тойм
