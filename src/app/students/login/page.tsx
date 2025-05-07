@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "lib/supabaseClient";
+import axios from "axios";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,37 +11,32 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+  // ✅ .env.local-оос API URL-г авч байна
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
     try {
-      // Нэвтрэх процесс
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const response = await axios.post(`${apiUrl}/login/student`, {
         email,
         password,
       });
 
-      if (error) {
-        throw new Error(error.message); // Алдааг шалгах
-      }
-
-      // Нэвтэрсэн хэрэглэгчийг шалгах
-      if (data?.user) {
-        // Нэвтэрсэн тохиолдолд students dashboard руу шилжих
+      if (response.data.success) {
         router.push("/students/dashboard");
       } else {
-        throw new Error("Хэрэглэгч олдсонгүй.");
+        setError(response.data.message || "Имэйл эсвэл нууц үг буруу байна.");
       }
-    } catch (err: any) {
-      setError("Нэвтрэхэд алдаа гарлаа: " + err.message); // Алдааг харуулах
+    } catch (error) {
+      setError("Нэвтрэхэд алдаа гарлаа.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
-  // Бүртгүүлэх хуудсанд шилжих
   const handleRedirect = () => {
     router.push("/students/register");
   };

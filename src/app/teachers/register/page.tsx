@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "lib/supabaseClient"; // Хэрвээ alias ашиглаагүй бол 'lib/supabaseClient' хэвээр үлдээнэ
+import { Input, Button, message } from "antd";
 
 export default function RegisterTeacherPage() {
   const router = useRouter();
@@ -24,42 +24,33 @@ export default function RegisterTeacherPage() {
       return;
     }
 
-    const { data, error: signUpError } = await supabase.auth.signUp({
-      email,
-      password,
-    });
+    // 1. Бүртгэл хийх сервер рүү хүсэлт илгээх
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        body: JSON.stringify({ email, password, name }),
+      });
 
-    if (signUpError) {
-      setError(signUpError.message);
-      setLoading(false);
-      return;
-    }
+      const result = await response.json();
 
-    const user = data?.user;
-
-    if (user && user.id && user.email) {
-      const { error: insertError } = await supabase.from("teachers").insert([
-        {
-          user_id: user.id,
-          email: user.email,
-          name: name,
-        },
-      ]);
-
-      if (insertError) {
+      if (!result.success) {
         setError(
-          "Багшийн мэдээлэл хадгалахад алдаа гарлаа: " + insertError.message
+          result.message || "Бүртгэл амжилтгүй боллоо. Дахин оролдоно уу."
         );
         setLoading(false);
         return;
       }
 
       router.push("/teachers/login");
-    } else {
-      setError("Бүртгэл амжилтгүй боллоо. Дахин оролдоно уу.");
+    } catch (error: unknown) {
+      // error-ийг тодорхойлох
+      if (error instanceof Error) {
+        setError("Бүртгүүлэхэд алдаа гарлаа: " + error.message);
+      } else {
+        setError("Бүртгүүлэхэд алдаа гарлаа.");
+      }
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -70,7 +61,7 @@ export default function RegisterTeacherPage() {
       >
         <h1 className="text-2xl font-bold text-center">Багш бүртгүүлэх</h1>
 
-        <input
+        <Input
           type="text"
           placeholder="Нэр"
           value={name}
@@ -79,7 +70,7 @@ export default function RegisterTeacherPage() {
           required
         />
 
-        <input
+        <Input
           type="email"
           placeholder="Имэйл"
           value={email}
@@ -88,8 +79,7 @@ export default function RegisterTeacherPage() {
           required
         />
 
-        <input
-          type="password"
+        <Input.Password
           placeholder="Нууц үг"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -97,8 +87,7 @@ export default function RegisterTeacherPage() {
           required
         />
 
-        <input
-          type="password"
+        <Input.Password
           placeholder="Нууц үгээ давтана уу"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
@@ -108,13 +97,14 @@ export default function RegisterTeacherPage() {
 
         {error && <p className="text-red-500 text-sm">{error}</p>}
 
-        <button
-          type="submit"
-          disabled={loading}
+        <Button
+          type="primary"
+          htmlType="submit"
+          loading={loading}
           className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
         >
           {loading ? "Бүртгэж байна..." : "Бүртгүүлэх"}
-        </button>
+        </Button>
 
         <p className="text-sm text-center text-gray-600">
           Аль хэдийн бүртгүүлсэн үү?{" "}

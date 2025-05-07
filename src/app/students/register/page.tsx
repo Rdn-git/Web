@@ -1,17 +1,18 @@
-"use client"; // Энэ мөрийг эхэнд байрлуулах
-
+"use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "lib/supabaseClient";
+import axios from "axios";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const [name, setName] = useState(""); // Хэрэглэгчийн нэр
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,34 +25,20 @@ export default function RegisterPage() {
       return;
     }
 
-    // Supabase руу бүртгэл хийх
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: "", // Баталгаажуулалтын холбоосыг түр идэвхгүй болгох
-      },
-    });
+    try {
+      const response = await axios.post(`${apiUrl}/register/student`, {
+        name,
+        email,
+        password,
+      });
 
-    if (error) {
-      setError(error.message);
-    } else {
-      // Бүртгэл амжилттай бол хэрэглэгчийн нэрийг "students" хүснэгтэд хадгалах
-      const { error: studentError } = await supabase
-        .from("students") // "students" хүснэгтэд хадгалж байна
-        .insert([
-          {
-            user_id: data.user?.id, // Supabase user ID
-            name: name, // Хэрэглэгчийн нэр
-            email: email, // Имэйл
-          },
-        ]);
-
-      if (studentError) {
-        setError(studentError.message);
+      if (response.data.success) {
+        router.push("/students/login");
       } else {
-        router.push("/students/login"); // Нэвтрэх хуудсанд шилжих
+        setError(response.data.message || "Алдаа гарлаа.");
       }
+    } catch (err: any) {
+      setError("Бүртгүүлэхэд алдаа гарлаа: " + err.message);
     }
 
     setLoading(false);
@@ -65,7 +52,6 @@ export default function RegisterPage() {
       >
         <h1 className="text-2xl font-bold text-center">Бүртгүүлэх</h1>
 
-        {/* Хэрэглэгчийн нэр талбар */}
         <input
           type="text"
           placeholder="Хэрэглэгчийн нэр"

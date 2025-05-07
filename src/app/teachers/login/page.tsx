@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "lib/supabaseClient";
 import { Input, Button, message } from "antd";
 
 export default function LoginTeacherPage() {
@@ -20,44 +19,54 @@ export default function LoginTeacherPage() {
 
     setLoading(true);
 
-    // 1. Нэвтрэх оролдлого
-    const { data: signInData, error: signInError } =
-      await supabase.auth.signInWithPassword({
-        email,
-        password,
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
-    if (signInError) {
-      message.error(`Нэвтрэхэд алдаа гарлаа: ${signInError.message}`);
-      setLoading(false);
-      return;
+      const result = await response.json();
+
+      if (!result.success) {
+        message.error(result.message || "Нэвтрэхэд алдаа гарлаа");
+        setLoading(false);
+        return;
+      }
+
+      const userId = result.userId;
+
+      if (!userId) {
+        message.error("Хэрэглэгчийн мэдээлэл олдсонгүй.");
+        setLoading(false);
+        return;
+      }
+
+      const teacherResponse = await fetch(`/api/teachers/${userId}`);
+      const teacherData = await teacherResponse.json();
+
+      if (!teacherData || teacherData.error) {
+        message.error("Энэ имэйл багшийн бүртгэлтэй тохирохгүй байна.");
+        setLoading(false);
+        return;
+      }
+
+      // ✅ Session хадгалах (user ID-г хадгалж байна)
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("role", "teacher"); // Хэрэглэгчийн үүрэг
+
+      message.success("Амжилттай багшийн хувиар нэвтэрлээ!");
+      router.push("/teachers/dashboard");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        message.error("Нэвтрэхэд алдаа гарлаа: " + error.message);
+      } else {
+        message.error("Нэвтрэхэд алдаа гарлаа");
+      }
     }
 
-    const userId = signInData?.user?.id;
-
-    if (!userId) {
-      message.error("Хэрэглэгчийн мэдээлэл олдсонгүй.");
-      setLoading(false);
-      return;
-    }
-
-    // 2. Багшийн бүртгэл байгаа эсэхийг шалгах
-    const { data: teacherData, error: teacherError } = await supabase
-      .from("teachers")
-      .select("*")
-      .eq("user_id", userId)
-      .single();
-
-    if (teacherError || !teacherData) {
-      message.error("Энэ имэйл багшийн бүртгэлтэй тохирохгүй байна.");
-      await supabase.auth.signOut(); // Нэвтэрсэн бол гарах
-      setLoading(false);
-      return;
-    }
-
-    // 3. Амжилттай бол багшийн dashboard руу оруулах
-    message.success("Амжилттай багшийн хувиар нэвтэрлээ!");
-    router.push("/teachers/dashboard");
     setLoading(false);
   };
 

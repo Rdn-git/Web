@@ -16,30 +16,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/programs/page.js"
     ],
-    "/currentnews/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/currentnews/page.js"
-    ],
-    "/currentnews/news-2/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/currentnews/news-2/page.js"
-    ],
-    "/programs/it/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/programs/it/page.js"
-    ],
-    "/programs/fashion/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/programs/fashion/page.js"
-    ],
     "/students/login/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/students/login/page.js"
+    ],
+    "/students/register/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/students/register/page.js"
     ]
   }
 }
